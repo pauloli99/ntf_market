@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
-import { Button } from '../components';
+import { Button, Input } from '../components';
 import images from '../assets';
 
 const CreateNFT = () => {
@@ -28,6 +28,10 @@ const CreateNFT = () => {
        ${isDragAccept ? ' border-file-accept ' : ''} 
        ${isDragReject ? ' border-file-reject ' : ''}`
   ), [isDragActive, isDragReject, isDragAccept]);
+
+  const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' });
+
+  const createMarket = () => {};
 
   return (
     <div className="flex justify-center sm:px-4 p-12">
@@ -70,6 +74,36 @@ const CreateNFT = () => {
               </aside>
             )}
           </div>
+        </div>
+
+        <Input
+          inputType="input"
+          title="Name"
+          placeholder="Asset Name"
+          handleClick={(e) => updateFormInput({ ...formInput, name: e.target.value })}
+        />
+
+        <Input
+          inputType="textarea"
+          title="Description"
+          placeholder="Asset Description"
+          handleClick={(e) => updateFormInput({ ...formInput, description: e.target.value })}
+        />
+
+        <Input
+          inputType="number"
+          title="Price"
+          placeholder="Asset Price"
+          handleClick={(e) => updateFormInput({ ...formInput, price: e.target.value })}
+        />
+
+        <div className="mt-7 w-full flex justify-end">
+          <Button
+            btnName="Create Item"
+            btnType="primary"
+            classStyles="rounded-xl"
+            handleClick={createMarket}
+          />
         </div>
       </div>
     </div>
